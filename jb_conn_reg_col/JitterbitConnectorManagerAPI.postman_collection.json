@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "9d09620d-4c80-4a60-b9e3-e40fb2b6ee65",
+		"name": "JitterbitConnectorManagerAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7452620"
+	},
+	"item": [
+		{
+			"name": "Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"var orgId = data.defaultOrgId;",
+							"var token = data.authenticationToken;",
+							"postman.setEnvironmentVariable(\"orgId\", orgId);",
+							"postman.setEnvironmentVariable(\"authToken\", token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"email\": \"gourav.kumar+reddev@jitterbit.com\",\n \"password\": \"Jitterbit123$%^\"\n}\n\n// {\n//   \"email\": \"matthew.witman@jitterbit.com\",\n//   \"password\": \"Satin-Sweep6-Survival\"\n// }"
+				},
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/user/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"user",
+						"login"
+					]
+				},
+				"description": "Login into Jitterbit Harmony Platform"
+			},
+			"response": []
+		},
+		{
+			"name": "Register Connector",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"var key = data.key;",
+							"var secret = data.secret;",
+							"var endpointEntityId = data.endpointEntityId;",
+							"var functionEntityStartId = data.functionEntityStartId;",
+							"var functionEntityEndId = data.functionEntityEndId;",
+							"",
+							"postman.setEnvironmentVariable(\"key\", key);",
+							"postman.setEnvironmentVariable(\"secret\", secret);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "authToken",
+						"value": "{{authToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"EpicorDemoCon\",\n    \"version\": \"3.0.1\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"orgs",
+						"{{orgId}}",
+						"connector"
+					]
+				},
+				"description": "Register a Connector"
+			},
+			"response": []
+		},
+		{
+			"name": "List registered connectors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authToken",
+						"value": "{{authToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"orgs",
+						"{{orgId}}",
+						"connector"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sync Agent",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authToken",
+						"value": "{{authToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector/6501/syncpublicconnector",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"orgs",
+						"{{orgId}}",
+						"connector",
+						"6501",
+						"syncpublicconnector"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete registered connector",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authToken",
+						"value": "{{authToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector/91",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"orgs",
+						"{{orgId}}",
+						"connector",
+						"91"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload JAR",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"var key = data.key;",
+							"var secret = data.secret;",
+							"var endpointEntityId = data.endpointEntityId;",
+							"var functionEntityStartId = data.functionEntityStartId;",
+							"var functionEntityEndId = data.functionEntityEndId;",
+							"",
+							"postman.setEnvironmentVariable(\"key\", key);",
+							"postman.setEnvironmentVariable(\"secret\", secret);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authToken",
+						"value": "{{authToken}}"
+					},
+					{
+						"key": "forceUpdate",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "name",
+						"value": "soapv2",
+						"type": "text"
+					},
+					{
+						"key": "version",
+						"value": "1.0.1",
+						"type": "text"
+					},
+					{
+						"key": "fileNameOnDisk",
+						"value": "jitterbit-connector-soap-1.0.0.jar",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/D:/jitterbit/connectorsRepo/New folder/jmsconsume/connectors/jms-connector/target/jitterbit-connector-jms-1.0.0.jar"
+					}
+				},
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector/8830/sdk/update",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"orgs",
+						"{{orgId}}",
+						"connector",
+						"8830",
+						"sdk",
+						"update"
+					]
+				},
+				"description": "Register a Connector"
+			},
+			"response": [
+				{
+					"name": "Upload JAR",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "authToken",
+								"value": "{{authToken}}"
+							},
+							{
+								"key": "forceUpdate",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "name",
+								"value": "Dropbox",
+								"type": "text"
+							},
+							{
+								"key": "version",
+								"value": "3.0.0",
+								"type": "text"
+							},
+							{
+								"key": "fileNameOnDisk",
+								"value": "dropbox-connector-3.0.0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {}
+						},
+						"url": {
+							"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector/91/sdk/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"jitterbit-cloud-restful-service",
+								"orgs",
+								"{{orgId}}",
+								"connector",
+								"91",
+								"sdk",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Jun 2019 20:32:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "Apache-Coyote/1.1"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"operation\": \"Update Connector SDK\"\n}"
+				}
+			]
+		},
+		{
+			"name": "validate security info",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "authToken",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/jitterbit-cloud-restful-service/orgs/{{orgId}}/connector/validate/securityinfo",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"jitterbit-cloud-restful-service",
+						"orgs",
+						"{{orgId}}",
+						"connector",
+						"validate",
+						"securityinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://local-services:4567/v1/crypto/decrypt",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\"enc\": [\n        \"$00RxVzrBZLBOBI/bNTiOMJsZqO4THWtG90q6rxPT9kxXY=\",\n        \"$00tJIIy9uua45LbJYj0exGgdmbWWPH9UgERX4q1cjBHU0=\"\n    ]\n    \n}"
+				},
+				"url": {
+					"raw": "http://local-services:4567/v1/crypto/decrypt",
+					"protocol": "http",
+					"host": [
+						"local-services"
+					],
+					"port": "4567",
+					"path": [
+						"v1",
+						"crypto",
+						"decrypt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://local-services:4567/v1/crypto/encrypt",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{clearText:  [\"\",\"\"], passphrase: \"\"}"
+				},
+				"url": {
+					"raw": "http://local-services:4567/v1/crypto/encrypt",
+					"protocol": "http",
+					"host": [
+						"local-services"
+					],
+					"port": "4567",
+					"path": [
+						"v1",
+						"crypto",
+						"encrypt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://14611.developer.epicor.com/Server/api/v1/Erp.BO.Customersvc/Customers?$filter=CustID eq 'JBTest04'",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "cU48p&5@",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "epicor",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://14611.developer.epicor.com/Server/api/v1/Erp.BO.Customersvc/Customers?$filter=CustID eq 'JBTest04'",
+					"protocol": "https",
+					"host": [
+						"14611",
+						"developer",
+						"epicor",
+						"com"
+					],
+					"path": [
+						"Server",
+						"api",
+						"v1",
+						"Erp.BO.Customersvc",
+						"Customers"
+					],
+					"query": [
+						{
+							"key": "$filter",
+							"value": "CustID eq 'JBTest04'"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
